@@ -120,6 +120,11 @@ export default function RequestTable() {
           '& .processing': { color: theme.palette.warning.main },
           '& .accepted': { color: theme.palette.success.main },
           '& .denied': { color: theme.palette.error.main },
+
+          '.MuiDataGrid-columnHeaderTitle': {
+            fontWeight: 'bold !important',
+            fontSize: '1.1rem !important',
+          },
         }}
         autoPageSize
         rows={requests}
@@ -162,68 +167,6 @@ export default function RequestTable() {
         </DialogTitle>
         <DialogContent>
           <Box display='flex' flexDirection='column' gap={3}>
-            <Grid container rowGap={1}>
-              <Grid xs={12} item>
-                <Typography variant='h6'>Thông tin yêu cầu</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'>Nội dung </Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant='body1'>{currentRequest?.description}</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'>Người yêu cầu </Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant='body1'>
-                  {`${currentRequest?.User.UserInfo.firstName} ${currentRequest?.User.UserInfo.lastName}`}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'> Số điện thoại </Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant='body1'>{currentRequest?.User.UserInfo.phone}</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'>Chung cư</Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant='body1'>
-                  {currentRequest?.User.UserInfo.Apartment.Building.name}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'>Căn hộ</Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant='body1'>
-                  {currentRequest?.User.UserInfo.Apartment.name}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'>Thời gian tạo</Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography variant='body1'>
-                  {new Date(currentRequest?.createdAt!).toLocaleString('vi-VN')}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography variant='body1'>Trạng thái</Typography>
-              </Grid>
-              <Grid item xs={9}>
-                <Typography
-                  variant='body1'
-                  className={
-                    RequestStatusMap[currentRequest?.status! as keyof typeof RequestStatusMap]
-                  }
-                >
-                  {currentRequest?.status}
-                </Typography>
-              </Grid>
-            </Grid>
             {currentRequest?.StaffId && (
               <Grid container rowGap={1}>
                 <Grid xs={12} item>
@@ -244,6 +187,40 @@ export default function RequestTable() {
                 </Grid>
               </Grid>
             )}
+            <Grid container rowGap={1}>
+              <Grid xs={12} item>
+                <Typography variant='h6'>Thông tin yêu cầu</Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Typography variant='body1'>Trạng thái</Typography>
+              </Grid>
+              <Grid item xs={9}>
+                <Typography
+                  variant='body1'
+                  className={
+                    RequestStatusMap[currentRequest?.status! as keyof typeof RequestStatusMap]
+                  }
+                >
+                  {currentRequest?.status}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Typography variant='body1'>Nội dung </Typography>
+              </Grid>
+              <Grid item xs={9}>
+                <Typography variant='body1'>{currentRequest?.description}</Typography>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Typography variant='body1'>Thời gian tạo</Typography>
+              </Grid>
+              <Grid item xs={9}>
+                <Typography variant='body1'>
+                  {new Date(currentRequest?.createdAt!).toLocaleString('vi-VN')}
+                </Typography>
+              </Grid>
+            </Grid>
           </Box>
         </DialogContent>
       </Dialog>

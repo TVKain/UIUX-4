@@ -53,11 +53,10 @@ import { formatCurrency } from '../../../util/currencyFormatter';
 
 import { useTheme } from '@mui/material';
 
-import { Visibility } from '@mui/icons-material';
-
-const InvoiceStatusMap = {
-  paid: 'Đã thanh toán',
-  unpaid: 'Chưa thanh toán',
+const InvoicePeriodMap = {
+  monthly: 'Hàng tháng',
+  quarterly: 'Hàng quý',
+  yearly: 'Hàng năm',
 };
 
 export default function InvoiceTable() {
@@ -69,77 +68,46 @@ export default function InvoiceTable() {
   const columns: GridColDef<InvoiceApartmentFull>[] = [
     { field: 'id', headerName: 'ID', flex: 0.05 },
     {
-      field: 'type',
-      headerName: 'Loại',
-      flex: 0.1,
-      valueGetter: (params) => params.row.Invoice.name,
-    },
-    {
-      field: 'description',
-      headerName: 'Mô tả',
-      flex: 0.1,
-    },
-    {
-      field: 'amount',
-      headerName: 'Số tiền',
-      flex: 0.1,
-      valueFormatter: (params) => {
-        return formatCurrency(params.value, 'vi-VN', 'VND');
+      field: 'Invoice',
+      headerName: 'Khoản thu',
+      flex: 0.05,
+      valueGetter: (params) => {
+        return params.row.Invoice.name;
       },
     },
-    {
-      field: 'startDate',
-      headerName: 'Ngày bắt đầu',
-      flex: 0.1,
-      type: 'date',
-      valueGetter: (params) => new Date(params.row.startDate),
-      valueFormatter: (params) => params.value?.toLocaleDateString('vi-VN'),
-    },
-    {
-      field: 'endDate',
-      headerName: 'Ngày kết thúc',
-      flex: 0.1,
-      type: 'date',
-      valueGetter: (params) => new Date(params.row.endDate),
-      valueFormatter: (params) => params.value?.toLocaleDateString('vi-VN'),
-    },
+
     {
       field: 'building',
       headerName: 'Chung cư',
-      flex: 0.1,
-      valueGetter: (params) => params.row.Apartment.Building.name,
+      flex: 0.05,
+      valueGetter: (params) => {
+        return params.row.Apartment.Building.name;
+      },
     },
     {
       field: 'apartment',
       headerName: 'Căn hộ',
-      flex: 0.1,
-      valueGetter: (params) => params.row.Apartment.name,
+      flex: 0.05,
+      valueGetter: (params) => {
+        return params.row.Apartment.name;
+      },
     },
     {
-      field: 'paidDate',
-      headerName: 'Ngày thanh toán',
-      flex: 0.1,
-      type: 'date',
-      valueGetter: (params) => params.row.paidDate && new Date(params.row.paidDate),
-      valueFormatter: (params) => params.value?.toLocaleDateString('vi-VN'),
+      field: 'period',
+      headerName: 'Kỳ hạn',
+      flex: 0.05,
+      valueFormatter(params) {
+        // @ts-ignore
+        return InvoicePeriodMap[params.value];
+      },
     },
     {
-      field: 'status',
-      headerName: 'Trạng thái',
-      flex: 0.1,
-      // @ts-ignore
-      valueGetter: (params) => InvoiceStatusMap[params.row.status],
-      cellClassName: (params) => params.row.status,
-    },
-    {
-      field: 'view',
-      type: 'actions',
-      flex: 0.1,
-      // @ts-ignore
-      getActions: (params) => {
-        return [
-          <GridActionsCellItem key='view' icon={<Visibility />} label='Xem' onClick={() => {}} />,
-        ];
+      field: 'amount',
+      headerName: 'Số tiền',
+      flex: 0.05,
+      valueFormatter(params) {
+        // @ts-ignore
+        return formatCurrency(params.value, 'vi-VN', 'VND');
       },
     },
   ];
@@ -160,6 +128,11 @@ export default function InvoiceTable() {
         sx={{
           '& .paid': { color: theme.palette.success.main },
           '& .unpaid': { color: theme.palette.error.main },
+
+          '.MuiDataGrid-columnHeaderTitle': {
+            fontWeight: 'bold !important',
+            fontSize: '1.1rem !important',
+          },
         }}
         autoPageSize
         rows={invoices}

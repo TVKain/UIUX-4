@@ -12,26 +12,21 @@ import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 import { dataGridLocaleText } from '../../../config/constants';
+import { useLocalStorage } from '@uidotdev/usehooks';
+import { User } from '../../../api/user/types';
+import { getApartments } from '../../../api/apartment/getApartments';
+import { UserInfo } from '../../../api/user-info/types';
 
-export default function ResidentTable() {
+export default function MemberTable() {
   const navigate = useNavigate();
 
-  const columns: GridColDef<GetUserInfoResponseElement>[] = [
+  const [user, _setUser] = useLocalStorage<User>('user', undefined);
+
+  const columns: GridColDef<UserInfo>[] = [
     { field: 'id', headerName: 'ID', flex: 0.1 },
     { field: 'lastName', headerName: 'Họ', flex: 0.1 },
     { field: 'firstName', headerName: 'Tên', flex: 0.1 },
-    {
-      field: 'building',
-      headerName: 'Chung cư',
-      flex: 0.1,
-      valueGetter: (params) => params.row.Apartment.Building.name,
-    },
-    {
-      field: 'apartment',
-      headerName: 'Căn hộ',
-      flex: 0.1,
-      valueGetter: (params) => params.row.Apartment.name,
-    },
+
     { field: 'gender', headerName: 'Giới tính', flex: 0.1 },
     {
       field: 'birthday',
@@ -46,34 +41,24 @@ export default function ResidentTable() {
     { field: 'city', headerName: 'Thành phố', flex: 0.1 },
     { field: 'district', headerName: 'Quận', flex: 0.1 },
     { field: 'subdistrict', headerName: 'Phường', flex: 0.1 },
+    { field: 'address', headerName: 'Địa chỉ', flex: 0.1 },
     { field: 'phone', headerName: 'Số điện thoại', flex: 0.1 },
     { field: 'email', headerName: 'Email', flex: 0.1 },
-    {
-      field: 'Thao tác',
-      type: 'actions',
-      cellClassName: 'actions',
-      getActions: (params) => [
-        <GridActionsCellItem
-          key='edit'
-          icon={<Edit />}
-          label='Edit'
-          onClick={() => {
-            navigate(`/staff/resident/update`, { state: params.row });
-          }}
-        />,
-      ],
-    },
   ];
 
-  const [userInfos, setUserInfos] = useState<GetUserInfoResponse>([]);
+  const [userInfos, setUserInfos] = useState<UserInfo[]>([]);
 
   useEffect(() => {
     const fetchUserInfos = async () => {
-      const response = await getUserInfos();
+      const userInfos = await getUserInfos();
 
-      console.log(response);
+      const apartments = await getApartments();
+      const userInfo = userInfos.find((userInfo) => userInfo.UserId === user.id);
+      const apartment = apartments.find((apartment) => apartment.id === userInfo!.ApartmentId);
 
-      setUserInfos(response);
+      console.log(apartment?.UserInfos);
+
+      setUserInfos(apartment!.UserInfos);
     };
 
     fetchUserInfos();

@@ -28,33 +28,10 @@ import { useLocalStorage } from '@uidotdev/usehooks';
 
 import { LoginResponse } from '../../api/user/login';
 
-const Link = React.forwardRef(function Link(itemProps, ref) {
-  // @ts-ignore
-  return <RouterLink ref={ref} {...itemProps} role={undefined} />;
-});
-
-// @ts-ignore
-function ListItemLink(props) {
-  const { icon, primary, to, color } = props;
-
-  return (
-    // @ts-ignore
-    <ListItem button={false} component={Link} to={to} sx={{ width: '100%' }}>
-      {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
-      <ListItemText
-        primary={primary}
-        sx={{
-          color: color,
-        }}
-      />
-    </ListItem>
-  );
-}
-
 const roles: Record<string, string> = {
-  staff: 'Nhân viên',
+  staff: 'Quản lý',
   resident: 'Cư dân',
-  manager: 'Quản lý',
+  manager: 'Quản trị',
   police: 'Cảnh sát',
 };
 
@@ -82,7 +59,7 @@ export default function Navbar({ base, items }: NavbarProps) {
         </Typography>
       </Box>
 
-      <FormControl variant='standard'>
+      <FormControl variant='standard' size='medium'>
         <InputLabel>Vai trò</InputLabel>
         <Select
           labelId='role-select'
@@ -107,21 +84,29 @@ export default function Navbar({ base, items }: NavbarProps) {
         </Select>
       </FormControl>
 
-      <List>
+      <Box display='flex' flexDirection='column' gap={2}>
         {items.map((item) => (
-          <ListItemLink
+          <Button
+            style={{
+              justifyContent: 'flex-start',
+              color:
+                location.pathname.includes(base) && location.pathname.includes(item.route)
+                  ? theme.palette.secondary.main
+                  : theme.palette.text.primary,
+              fontSize: '1.2rem',
+              textTransform: 'capitalize',
+            }}
+            size='large'
             key={item.route}
-            primary={item.name}
-            to={`/${base}/${item.route}`}
-            disablePadding
-            color={
-              location.pathname.includes(base) && location.pathname.includes(item.route)
-                ? theme.palette.secondary.main
-                : theme.palette.text.primary
-            }
-          />
+            onClick={() => {
+              navigate(`/${base}/${item.route}`);
+            }}
+          >
+            {item.name}
+          </Button>
         ))}
-      </List>
+      </Box>
+
       <Divider />
 
       <Button

@@ -12,6 +12,7 @@ import {
   FormHelperText,
   Alert,
   Snackbar,
+  Typography,
 } from '@mui/material';
 
 import { useEffect, useState } from 'react';
@@ -37,6 +38,7 @@ interface CreateUserInfoFormProps {
   city: string;
   district: string;
   subdistrict: string;
+  address: string;
   ApartmentId?: number;
   BuildingId?: number;
   account: boolean;
@@ -67,6 +69,7 @@ const ResidentAddForm = () => {
       city: '',
       district: '',
       subdistrict: '',
+      address: '',
       account: false,
       ApartmentId: undefined,
       BuildingId: undefined,
@@ -85,9 +88,10 @@ const ResidentAddForm = () => {
         .max(11, 'Số điện thoại có nhiều nhất 11 chữ số')
 
         .required('Số điện thoại không được để trống'),
-      city: yup.string().required('Thành phố không được để trống'),
-      district: yup.string().required('Quận không được để trống'),
+      city: yup.string().required('Tỉnh/Thành phố không được để trống'),
+      district: yup.string().required('Quận/Huyện không được để trống'),
       subdistrict: yup.string().required('Phường không được để trống'),
+      address: yup.string().required('Địa chỉ không được để trống'),
       account: yup.boolean(),
       ApartmentId: yup.number().required('Căn hộ không được để trống'),
       BuildingId: yup.number().required('Chung cư không được để trống'),
@@ -196,34 +200,56 @@ const ResidentAddForm = () => {
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12}>
+          <Typography variant='h5'>Thông tin địa chỉ</Typography>
+        </Grid>
+
+        <Grid item xs={6}>
           <TextField
             onChange={formik.handleChange('city')}
             value={formik.values.city}
             fullWidth
-            label='Thành phố'
+            label='Tỉnh/Thành phố'
             error={formik.touched.city && Boolean(formik.errors.city)}
+            helperText={formik.touched.city && formik.errors.city}
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
             onChange={formik.handleChange('district')}
             value={formik.values.district}
             fullWidth
-            label='Quận'
+            label='Quận/Huyện'
             error={formik.touched.district && Boolean(formik.errors.district)}
+            helperText={formik.touched.district && formik.errors.district}
           />
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
             onChange={formik.handleChange('subdistrict')}
             value={formik.values.subdistrict}
             fullWidth
-            label='Phường'
+            label='Xã/Phường'
             error={formik.touched.subdistrict && Boolean(formik.errors.subdistrict)}
+            helperText={formik.touched.subdistrict && formik.errors.subdistrict}
           />
+        </Grid>
+
+        <Grid item xs={6}>
+          <TextField
+            onChange={formik.handleChange('address')}
+            value={formik.values.address}
+            fullWidth
+            label='Địa chỉ chi tiết'
+            error={formik.touched.address && Boolean(formik.errors.address)}
+            helperText={formik.touched.address && formik.errors.address}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant='h5'>Thông tin căn hộ</Typography>
         </Grid>
 
         <Grid item xs={6}>

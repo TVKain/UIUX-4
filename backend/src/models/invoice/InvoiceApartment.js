@@ -6,43 +6,25 @@ import Invoice from "./Invoice.js";
 import Apartment from "../building/Apartment.js";
 
 const InvoiceApartment = sequelize.define("InvoiceApartment", {
-  description: {
-    type: DataTypes.STRING,
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  period: {
+    type: DataTypes.ENUM("monthly", "quarterly", "yearly"),
     allowNull: false,
-    unique: false,
   },
   amount: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
-    unique: false,
-  },
-  startDate: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-    unique: false,
-  },
-  endDate: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-    unique: false,
-  },
-  status: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: "unpaid",
-    unique: false,
-  },
-  paidDate: {
-    type: DataTypes.DATEONLY,
-    allowNull: true,
-    unique: false,
   },
 });
 
-Invoice.hasMany(InvoiceApartment);
-InvoiceApartment.belongsTo(Invoice);
+Invoice.belongsToMany(Apartment, { through: InvoiceApartment });
+Apartment.belongsToMany(Invoice, { through: InvoiceApartment });
 
-Apartment.hasMany(InvoiceApartment);
+InvoiceApartment.belongsTo(Invoice);
 InvoiceApartment.belongsTo(Apartment);
 
 export default InvoiceApartment;

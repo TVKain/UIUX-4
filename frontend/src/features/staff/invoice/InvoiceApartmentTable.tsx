@@ -1,17 +1,9 @@
-import {
-  DataGrid,
-  GridToolbar,
-  GridActionsCellItem,
-  GridRowParams,
-  GridColDef,
-  GridValueGetterParams,
-} from '@mui/x-data-grid';
+import { DataGrid, GridToolbar, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
 import { dataGridLocaleText } from '../../../config/constants';
 
 import { useState, useEffect } from 'react';
 
-import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { getApartments } from '../../../api/apartment/getApartments';
 
@@ -51,7 +43,11 @@ export default function InvoiceApartmentTable({ formik }: { formik: any }) {
 
   useEffect(() => {
     const fetchApartments = async () => {
-      const response = await getApartments();
+      let response = await getApartments();
+
+      response = response.filter((apartment) => {
+        return apartment.UserInfos.length !== 0;
+      });
       setApartments(response);
     };
 
@@ -73,11 +69,15 @@ export default function InvoiceApartmentTable({ formik }: { formik: any }) {
       onRowSelectionModelChange={(row) => {
         formik.setFieldValue('ApartmentIds', row);
       }}
+      rowSelectionModel={formik.values.ApartmentIds}
       pagination
       checkboxSelection
       disableRowSelectionOnClick
       localeText={dataGridLocaleText}
       slots={{ toolbar: GridToolbar }}
+      sx={{
+        borderColor: formik.touched.ApartmentIds && formik.errors.ApartmentIds ? 'red' : '',
+      }}
     />
   );
 }

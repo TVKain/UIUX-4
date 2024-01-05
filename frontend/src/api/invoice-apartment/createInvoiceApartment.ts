@@ -3,8 +3,7 @@ import { InvoiceApartment } from './types';
 import axios from 'axios';
 import { url } from '../../config/constants';
 
-interface CreateInvoiceApartmentRequest
-  extends Omit<Omit<Omit<InvoiceApartment, 'id'>, 'paidDate'>, 'status'> {}
+interface CreateInvoiceApartmentRequest extends Omit<InvoiceApartment, 'id'> {}
 
 async function createInvoiceApartment(
   createInvoiceApartmentRequest: CreateInvoiceApartmentRequest,

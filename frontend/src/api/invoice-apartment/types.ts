@@ -4,14 +4,10 @@ import { Invoice } from '../invoice/types';
 
 interface InvoiceApartment {
   id: number;
-  description: string;
+  period: string;
   amount: number;
-  startDate: string;
-  endDate: string;
-  status: string;
-  paidDate: string;
-  InvoiceId: number;
   ApartmentId: number;
+  InvoiceId: number;
 }
 
 interface InvoiceApartmentFull extends InvoiceApartment {

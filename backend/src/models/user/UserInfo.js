@@ -42,6 +42,10 @@ const UserInfo = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     joinedDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,

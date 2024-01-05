@@ -75,6 +75,12 @@ export default function ApartmentTable() {
 
   return (
     <DataGrid
+      sx={{
+        '.MuiDataGrid-columnHeaderTitle': {
+          fontWeight: 'bold !important',
+          fontSize: '1.1rem !important',
+        },
+      }}
       autoPageSize
       rows={apartments}
       columns={columns}

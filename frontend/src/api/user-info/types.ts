@@ -9,6 +9,7 @@ interface UserInfo {
   city: string;
   district: string;
   subdistrict: string;
+  address: string;
   UserId: number;
   ApartmentId: number;
 }

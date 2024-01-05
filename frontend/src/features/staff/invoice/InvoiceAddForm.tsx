@@ -1,9 +1,5 @@
 import {
   FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   TextField,
   Typography,
   Box,
@@ -12,49 +8,42 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  FormHelperText,
+  Alert,
+  Snackbar,
 } from '@mui/material';
-
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
 
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 
-import {
-  GetBuildingsResponse,
-  getBuildings,
-  GetBuildingsResponseElement,
-} from '../../../api/building/getBuildings';
-
 import { getInvoices } from '../../../api/invoice/getInvoices';
 import { Invoice } from '../../../api/invoice/types';
-
-import { CreateInvoiceApartmentRequest } from '../../../api/invoice-apartment/createInvoiceApartment';
-import dayjs, { Dayjs } from 'dayjs';
-
-import { DatePicker } from '@mui/x-date-pickers';
 
 import * as yup from 'yup';
 import InvoiceApartmentTable from './InvoiceApartmentTable';
 
+import {
+  CreateInvoiceForApartmentsRequest,
+  createInvoiceForApartments,
+} from '../../../api/invoice-apartment/createInvoiceForApartments';
 type InvoiceApartmentAddFormProps = {
   InvoiceId: number | undefined;
   ApartmentIds: number[];
-  description: string;
+  period: string;
   amount: number;
-  startDate: Dayjs;
-  endDate: Dayjs;
 };
 
-function toCreateInvoiceApartmentRequest(
-  values: InvoiceApartmentAddFormProps,
-): CreateInvoiceApartmentRequest {
-  // @ts-ignore
-  return {};
-}
+const periods = [
+  {
+    value: 'monthly',
+    name: 'Hàng tháng',
+  },
+  { value: 'quarterly', name: 'Hàng quý' },
+  { value: 'yearly', name: 'Hàng năm' },
+];
 
 export default function InvoiceAddForm() {
   const [invoiceTypes, setInvoiceTypes] = React.useState<Invoice[]>([]);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   useEffect(() => {
     async function fetchInvoiceTypes() {
@@ -69,30 +58,21 @@ export default function InvoiceAddForm() {
     initialValues: {
       InvoiceId: 1,
       ApartmentIds: [],
-      description: '',
       amount: 0,
-      startDate: dayjs(),
-      endDate: dayjs(),
+      period: 'monthly',
     },
     validationSchema: yup.object<InvoiceApartmentAddFormProps>({
       InvoiceId: yup.number().required(),
-      ApartmentIds: yup.array().required(),
-      description: yup.string().required('Mô tả không được để trống'),
+      ApartmentIds: yup.array().min(1, 'Phải chọn ít nhất một căn hộ'),
       amount: yup
         .number()
         .required('Số tiền không được để trống')
         .moreThan(0, 'Số tiền phải lớn hơn 0'),
-      startDate: yup
-        .date()
-        .required()
-        .max(yup.ref('endDate'), 'Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc'),
-      endDate: yup
-        .date()
-        .required()
-        .min(yup.ref('startDate'), 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu'),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const result = createInvoiceForApartments(values as CreateInvoiceForApartmentsRequest);
+      setSnackbarOpen(true);
+      formik.resetForm();
     },
   });
 
@@ -125,7 +105,27 @@ export default function InvoiceAddForm() {
             </FormControl>
           )}
         </Grid>
+
         <Grid item xs={6}>
+          <FormControl fullWidth>
+            <InputLabel id='invoice-select-label'>Kỳ hạn</InputLabel>
+            <Select
+              label='Kỳ hạn'
+              value={formik.values.period}
+              onChange={(event) => {
+                formik.setFieldValue('period', event.target.value);
+              }}
+            >
+              {periods.map((period) => (
+                <MenuItem key={period.value} value={period.value}>
+                  {period.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12}>
           <TextField
             fullWidth
             label='Số tiền'
@@ -133,68 +133,55 @@ export default function InvoiceAddForm() {
             InputProps={{
               endAdornment: 'đ',
             }}
-            error={!!formik.errors.amount}
-            helperText={formik.errors.amount}
+            error={formik.touched.amount && Boolean(formik.errors.amount)}
+            helperText={formik.touched.amount && formik.errors.amount}
             value={formik.values.amount}
             onChange={formik.handleChange('amount')}
           />
         </Grid>
-
-        <Grid item xs={6}>
-          <DatePicker
-            value={formik.values.startDate}
-            onChange={(newValue) => {
-              formik.setFieldValue('startDate', newValue);
-            }}
-            label='Ngày bắt đầu'
-            orientation='landscape'
-            slotProps={{ textField: { fullWidth: true, contentEditable: false } }}
-          />
-        </Grid>
-
-        <Grid item xs={6}>
-          <DatePicker
-            value={formik.values.endDate}
-            onChange={(newValue) => {
-              formik.setFieldValue('endDate', newValue);
-            }}
-            label='Ngày kết thúc'
-            orientation='landscape'
-            slotProps={{ textField: { fullWidth: true, contentEditable: false } }}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label='Mô tả'
-            value={formik.values.description}
-            onChange={formik.handleChange('description')}
-            error={!!formik.errors.description}
-            helperText={formik.errors.description}
-          />
-        </Grid>
       </Grid>
 
-      <Box flex={1} display='flex' flexDirection='column' gap={2}>
+      <Box flex={0.75} display='flex' flexDirection='column' gap={2}>
         <Typography variant='h5' color='text'>
           Các căn hộ áp dụng
         </Typography>
 
         <InvoiceApartmentTable formik={formik} />
-
+        <Typography
+          sx={{
+            color: 'red',
+            display: formik.touched.ApartmentIds && formik.errors.ApartmentIds ? 'block' : 'none',
+          }}
+        >
+          {formik.touched.ApartmentIds && formik.errors.ApartmentIds}
+        </Typography>
         <Box alignSelf='end'>
           <Button
             onClick={() => {
-              console.log(formik.values);
               formik.handleSubmit();
             }}
             variant='contained'
           >
-            Tạo khoản phí
+            Tạo khoản thu
           </Button>
         </Box>
       </Box>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={(_event, reason) => {
+          if (reason === 'clickaway') {
+            return;
+          }
+          setSnackbarOpen(false);
+        }}
+      >
+        <Alert severity='success' sx={{ width: '100%' }}>
+          Thêm khoản thu thành công
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

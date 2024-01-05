@@ -152,6 +152,12 @@ export default function RequestTable() {
   return (
     <>
       <DataGrid
+        sx={{
+          '.MuiDataGrid-columnHeaderTitle': {
+            fontWeight: 'bold !important',
+            fontSize: '1.1rem !important',
+          },
+        }}
         autoPageSize
         rows={requests}
         columns={columns}

@@ -1,4 +1,4 @@
-import Invoice from "../../models/invoice/Invoice.js";
+import Invoice from "../../../models/invoice/Invoice.js";
 
 export default async function seedInvoice() {
   const invoiceTypes = [
