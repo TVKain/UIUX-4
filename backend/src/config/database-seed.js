@@ -13,6 +13,12 @@ import Invoice from "../models/invoice/Invoice.js";
 import InvoiceApartment from "../models/invoice/InvoiceApartment.js";
 import InvoiceApartmentPayment from "../models/invoice/InvoiceApartmentPayment.js";
 
+import TemporaryAbscene from "../models/temporary/TemporaryAbscene.js";
+
+import TemporaryResidence from "../models/temporary/TemporaryResidence.js";
+
+import Notification from "../models/notification/Notification.js";
+
 import seedBuilding from "./seed/seedBuilding.js";
 import seedApartment from "./seed/seedApartment.js";
 import seedRequest from "./seed/seedRequest.js";
@@ -24,6 +30,12 @@ import seedInvoice from "./seed/invoice/seedInvoice.js";
 import seedInvoiceApartment from "./seed/invoice/seedInvoiceApartment.js";
 
 import seedInvoiceApartmentPayment from "./seed/invoice/seedInvoiceApartmentPayment.js";
+
+import seedTemporaryResidence from "./seed/temporary/seedTemporaryResidence.js";
+
+import seedTemporaryAbsence from "./seed/temporary/seedTemporaryAbsence.js";
+
+import seedNotification from "./seed/notification/seedNotification.js";
 
 export async function synchronizeDatabase() {
   await Role.sync({ force: true });
@@ -41,6 +53,12 @@ export async function synchronizeDatabase() {
   await InvoiceApartment.sync({ force: true });
   await InvoiceApartmentPayment.sync({ force: true });
 
+  await TemporaryAbscene.sync({ force: true });
+
+  await TemporaryResidence.sync({ force: true });
+
+  await Notification.sync({ force: true });
+
   await seedDatabase();
   console.log("Database synchronized successfully.");
 }
@@ -55,4 +73,9 @@ export async function seedDatabase() {
   await seedInvoice();
   await seedInvoiceApartment();
   await seedInvoiceApartmentPayment();
+
+  await seedTemporaryResidence();
+  await seedTemporaryAbsence();
+
+  await seedNotification();
 }

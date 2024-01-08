@@ -11,7 +11,7 @@ const InvoiceApartmentPayment = sequelize.define("InvoiceApartmentPayment", {
   },
   amount: {
     type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: true,
   },
   noticeDate: {
     type: DataTypes.DATEONLY,

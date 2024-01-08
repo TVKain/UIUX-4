@@ -35,7 +35,7 @@ const ResidentAddComplaint = () => {
       <Box
         display='flex'
         alignItems='center'
-        gap={2}
+        gap={4}
         p={3}
         borderBottom={1}
         borderColor='rgba(0, 0, 0, 0.12)'
@@ -51,7 +51,7 @@ const ResidentAddComplaint = () => {
           Thông tin khiếu nại
         </Typography>
 
-        <Stack mt={2} spacing={2}>
+        <Stack mt={2} spacing={4}>
           <FormControl>
             <InputLabel id='select-nature-label'>Nature</InputLabel>
             <Select

@@ -12,6 +12,8 @@ interface UserInfo {
   address: string;
   UserId: number;
   ApartmentId: number;
+  joinDate: string;
+  leaveDate: string;
 }
 
 export type { UserInfo };

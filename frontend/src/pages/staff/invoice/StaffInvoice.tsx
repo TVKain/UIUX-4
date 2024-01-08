@@ -7,7 +7,7 @@ export default function StaffInvoice() {
   const navigate = useNavigate();
 
   return (
-    <Box display='flex' p={2} flexDirection='column' gap={2} height='100vh'>
+    <Box display='flex' padding={4} flexDirection='column' gap={4} height='100vh'>
       <Typography variant='h3' color='text'>
         Khoản thu
       </Typography>

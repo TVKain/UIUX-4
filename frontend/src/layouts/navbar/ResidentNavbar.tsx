@@ -8,7 +8,6 @@ const items = [
   { name: 'Yêu cầu', route: 'request' },
   { name: 'Tạm trú', route: 'temporary-residence' },
   { name: 'Tạm vắng', route: 'temporary-absence' },
-  { name: 'Hồ sơ', route: 'profile' },
 ];
 
 export default function ResidentNavbar() {

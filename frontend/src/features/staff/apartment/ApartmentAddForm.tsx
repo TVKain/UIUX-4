@@ -71,7 +71,7 @@ const ApartmentAddForm = () => {
           Thêm căn hộ thành công
         </Alert>
       </Snackbar>
-      <Grid container spacing={2} justifyContent='flex-end'>
+      <Grid container spacing={4} justifyContent='flex-end'>
         <Grid item xs={6}>
           <TextField
             label='Tên căn hộ'

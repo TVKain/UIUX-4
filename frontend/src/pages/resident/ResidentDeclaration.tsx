@@ -92,7 +92,7 @@ const AbsenceForm = () => {
           label='Địa chỉ hiện tại*'
           variant='outlined'
         />
-        <Stack direction='row' spacing={2}>
+        <Stack direction='row' spacing={4}>
           <DatePicker
             sx={{ width: '100%' }}
             label='Ngày bắt đầu'

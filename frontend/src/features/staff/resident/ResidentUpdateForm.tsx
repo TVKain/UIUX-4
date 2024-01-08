@@ -141,7 +141,7 @@ const ResidentUpdateForm = () => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid container spacing={2} justifyContent='flex-end'>
+      <Grid container spacing={4} justifyContent='flex-end'>
         <Grid item xs={6}>
           <TextField
             onChange={formik.handleChange('lastName')}

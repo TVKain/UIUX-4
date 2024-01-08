@@ -71,7 +71,12 @@ let apartmentPayments2 = [
     amount: 150000,
     noticeDate: "2023-09-30",
   },
-  { InvoiceApartmentId: 2, paidDate: "", amount: 150000, noticeDate: "" },
+  {
+    InvoiceApartmentId: 2,
+    paidDate: null,
+    amount: null,
+    noticeDate: "2023-10-30",
+  },
 ];
 
 export default apartmentPayments2;

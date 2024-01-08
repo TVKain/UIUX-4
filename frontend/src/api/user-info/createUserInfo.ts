@@ -5,7 +5,8 @@ import { url } from '../../config/constants';
 import axios from 'axios';
 import { User } from '../user/types';
 
-interface CreateUserInfoRequest extends Omit<Omit<UserInfo, 'id'>, 'UserId'> {
+interface CreateUserInfoRequest
+  extends Omit<Omit<Omit<Omit<UserInfo, 'id'>, 'UserId'>, 'joinDate'>, 'leaveDate'> {
   account: boolean;
 }
 

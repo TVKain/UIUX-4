@@ -57,6 +57,7 @@ const InvoicePeriodMap = {
   monthly: 'Hàng tháng',
   quarterly: 'Hàng quý',
   yearly: 'Hàng năm',
+  onetime: 'Một lần',
 };
 
 export default function InvoiceTable() {

@@ -3,7 +3,7 @@ import { Box, Typography, Divider } from '@mui/material';
 
 export default function StaffApartmentAdd() {
   return (
-    <Box display='flex' flexDirection='column' padding={2} width={1} rowGap={2} height='100vh'>
+    <Box display='flex' flexDirection='column' padding={4} width={1} rowGap={4} height='100vh'>
       <Typography variant='h3' color='text' fontWeight={500}>
         Thêm căn hộ
       </Typography>

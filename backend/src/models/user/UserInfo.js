@@ -46,10 +46,14 @@ const UserInfo = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    joinedDate: {
+    joinDate: {
       type: DataTypes.DATEONLY,
       allowNull: false,
       defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+    },
+    leaveDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
     },
   },
   {}

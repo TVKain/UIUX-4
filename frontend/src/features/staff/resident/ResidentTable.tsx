@@ -24,13 +24,13 @@ export default function ResidentTable() {
       field: 'building',
       headerName: 'Chung cư',
       flex: 0.1,
-      valueGetter: (params) => params.row.Apartment.Building.name,
+      valueGetter: (params) => (params.row.Apartment ? params.row.Apartment.Building.name : ''),
     },
     {
       field: 'apartment',
       headerName: 'Căn hộ',
       flex: 0.1,
-      valueGetter: (params) => params.row.Apartment.name,
+      valueGetter: (params) => (params.row.Apartment ? params.row.Apartment.name : ''),
     },
     { field: 'gender', headerName: 'Giới tính', flex: 0.1 },
     {

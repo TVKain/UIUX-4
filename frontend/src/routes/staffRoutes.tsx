@@ -15,6 +15,9 @@ import StaffInvoice from '../pages/staff/invoice/StaffInvoice';
 import StaffRequest from '../pages/staff/request/StaffRequest';
 import StaffInvoiceAdd from '../pages/staff/invoice/StaffInvoiceAdd';
 
+import Notification from '../pages/notification/Notification';
+import NotificationAdd from '../pages/notification/NotificationAdd';
+
 const staffRoutes = [
   {
     path: '/staff',
@@ -105,6 +108,22 @@ const staffRoutes = [
     element: (
       <LayoutProvider navbar={<StaffNavbar />}>
         <StaffRequest />
+      </LayoutProvider>
+    ),
+  },
+  {
+    path: '/staff/notification',
+    element: (
+      <LayoutProvider navbar={<StaffNavbar />}>
+        <Notification />
+      </LayoutProvider>
+    ),
+  },
+  {
+    path: '/staff/notification/add',
+    element: (
+      <LayoutProvider navbar={<StaffNavbar />}>
+        <NotificationAdd />
       </LayoutProvider>
     ),
   },

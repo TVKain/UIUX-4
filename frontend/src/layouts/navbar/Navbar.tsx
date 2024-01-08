@@ -51,7 +51,7 @@ export default function Navbar({ base, items }: NavbarProps) {
   const [logoutOpen, setLogoutOpen] = React.useState(false);
 
   return (
-    <Box display='flex' flexDirection='column' justifyContent='center' p={2} gap={2} height='100%'>
+    <Box display='flex' flexDirection='column' justifyContent='center' p={4} gap={4} height='100%'>
       <Box display='flex' justifyContent='center' gap={1} alignItems='center'>
         <Box component='img' sx={{ height: '100%', width: '25%' }} src='/src/assets/logo.svg' />
         <Typography variant='h5' color='primary' fontWeight='600'>
@@ -84,7 +84,7 @@ export default function Navbar({ base, items }: NavbarProps) {
         </Select>
       </FormControl>
 
-      <Box display='flex' flexDirection='column' gap={2}>
+      <Box display='flex' flexDirection='column' gap={4}>
         {items.map((item) => (
           <Button
             style={{
@@ -111,7 +111,7 @@ export default function Navbar({ base, items }: NavbarProps) {
 
       <Button
         sx={{ marginTop: 'auto' }}
-        variant='text'
+        variant='contained'
         startIcon={<Logout />}
         onClick={() => {
           setLogoutOpen(true);
@@ -146,6 +146,7 @@ export default function Navbar({ base, items }: NavbarProps) {
               navigate('/login');
             }}
             autoFocus
+            variant='contained'
           >
             Đồng ý
           </Button>

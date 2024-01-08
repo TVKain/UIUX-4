@@ -12,7 +12,7 @@ const InvoiceApartment = sequelize.define("InvoiceApartment", {
     autoIncrement: true,
   },
   period: {
-    type: DataTypes.ENUM("monthly", "quarterly", "yearly"),
+    type: DataTypes.ENUM("monthly", "quarterly", "yearly", "onetime"),
     allowNull: false,
   },
   amount: {

@@ -10,6 +10,11 @@ import ResidentComplaints from '../pages/resident/request/ResidentComplaints';
 import ResidentInvoice from '../pages/resident/invoice/ResidentInvoice';
 import ResidentRequest from '../pages/resident/request/ResidentRequest';
 import ResidentAddRequest from '../pages/resident/request/ResidentAddRequest';
+import TemporaryResidence from '../pages/resident/temporary-residence/TemporaryResidence';
+import TemporaryAbsence from '../pages/resident/temporary-absence/TemporaryAbsence';
+import StaffDashboard from '../pages/staff/StaffDashboard';
+
+import Notification from '../pages/resident/notification/Notification';
 
 const residentRoutes = [
   {
@@ -20,7 +25,7 @@ const residentRoutes = [
     path: '/resident/dashboard',
     element: (
       <LayoutProvider navbar={<ResidentNavbar />}>
-        <ResidentDashboard />
+        <StaffDashboard />
       </LayoutProvider>
     ),
   },
@@ -61,6 +66,30 @@ const residentRoutes = [
     element: (
       <LayoutProvider navbar={<ResidentNavbar />}>
         <ResidentAddRequest />
+      </LayoutProvider>
+    ),
+  },
+  {
+    path: '/resident/temporary-residence',
+    element: (
+      <LayoutProvider navbar={<ResidentNavbar />}>
+        <TemporaryResidence />
+      </LayoutProvider>
+    ),
+  },
+  {
+    path: '/resident/temporary-absence',
+    element: (
+      <LayoutProvider navbar={<ResidentNavbar />}>
+        <TemporaryAbsence />
+      </LayoutProvider>
+    ),
+  },
+  {
+    path: '/resident/notification',
+    element: (
+      <LayoutProvider navbar={<ResidentNavbar />}>
+        <Notification />
       </LayoutProvider>
     ),
   },

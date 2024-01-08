@@ -7,7 +7,6 @@ const items = [
   { name: 'Khoản thu', route: 'invoice' },
   { name: 'Yêu cầu', route: 'request' },
   { name: 'Thông báo', route: 'notification' },
-  { name: 'Hồ sơ', route: 'profile' },
 ];
 
 export default function StaffNavbar() {

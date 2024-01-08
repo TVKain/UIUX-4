@@ -6,7 +6,7 @@ export default function StaffApartment() {
   const navigate = useNavigate();
 
   return (
-    <Box display='flex' flexDirection='column' padding={2} rowGap={2} height='100vh'>
+    <Box display='flex' flexDirection='column' padding={4} rowGap={4} height='100vh'>
       <Typography variant='h3' color='text'>
         Căn hộ
       </Typography>

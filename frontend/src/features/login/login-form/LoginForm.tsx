@@ -48,7 +48,7 @@ export default function LoginForm() {
         justifyContent='center'
         alignItems='center'
       >
-        <Grid container item justifyContent='center' alignItems='center' columnSpacing={2}>
+        <Grid container item justifyContent='center' alignItems='center' columnspacing={4}>
           <Grid item xs={4}>
             <Box component='img' src='/src/assets/logo.svg' />
           </Grid>

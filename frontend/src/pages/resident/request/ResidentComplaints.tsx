@@ -144,7 +144,7 @@ const ResidentComplaints = () => {
           User Management
         </Typography>
 
-        <Box px={3} mt={4} display='flex' alignItems='center' justifyContent='flex-end' gap={2}>
+        <Box px={3} mt={4} display='flex' alignItems='center' justifyContent='flex-end' gap={4}>
           <FormControl>
             <InputLabel id='filter-label'>Bộ lọc</InputLabel>
             <Select
@@ -216,7 +216,7 @@ const ResidentComplaints = () => {
           </Typography>
 
           <Stack spacing={3} mt={4}>
-            <Stack direction='row' spacing={2} sx={{ '& > :not(style)': { flex: 1 } }}>
+            <Stack direction='row' spacing={4} sx={{ '& > :not(style)': { flex: 1 } }}>
               <TextField
                 label='Bản chất khiếu nại'
                 defaultValue={dataModal?.complaintNature}
@@ -232,7 +232,7 @@ const ResidentComplaints = () => {
                 }}
               />
             </Stack>
-            <Stack direction='row' spacing={2} sx={{ '& > :not(style)': { flex: 1 } }}>
+            <Stack direction='row' spacing={4} sx={{ '& > :not(style)': { flex: 1 } }}>
               <TextField
                 label='Trạng thái'
                 defaultValue={getStatusInfo(dataModal?.status).text}

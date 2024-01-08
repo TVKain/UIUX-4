@@ -34,6 +34,10 @@ type InvoiceApartmentAddFormProps = {
 
 const periods = [
   {
+    value: 'onetime',
+    name: 'Một lần',
+  },
+  {
     value: 'monthly',
     name: 'Hàng tháng',
   },
@@ -77,8 +81,8 @@ export default function InvoiceAddForm() {
   });
 
   return (
-    <Box display='flex' flexDirection='column' gap={2} height={1}>
-      <Grid container spacing={2} justifyContent='flex-end'>
+    <Box display='flex' flexDirection='column' gap={4} height={1}>
+      <Grid container spacing={4} justifyContent='flex-end'>
         <Grid item xs={12}>
           <Typography variant='h5' color='text'>
             Thông tin khoản thu
@@ -141,7 +145,7 @@ export default function InvoiceAddForm() {
         </Grid>
       </Grid>
 
-      <Box flex={0.75} display='flex' flexDirection='column' gap={2}>
+      <Box flex={0.75} display='flex' flexDirection='column' gap={4}>
         <Typography variant='h5' color='text'>
           Các căn hộ áp dụng
         </Typography>

@@ -4,7 +4,7 @@ import ResidentAddForm from '../../../features/staff/resident/ResidentAddForm';
 
 export default function StaffResidentAdd() {
   return (
-    <Box display='flex' flexDirection='column' padding={2} width={1} rowGap={2} height='100vh'>
+    <Box display='flex' flexDirection='column' padding={4} width={1} rowGap={4} height='100vh'>
       <Typography variant='h3' color='text' fontWeight={500}>
         Thêm cư dân
       </Typography>
