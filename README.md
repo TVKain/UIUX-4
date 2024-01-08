@@ -16,6 +16,9 @@ npm i
 npm run dev
 ```
 
-Đăng nhập với tài khoản 'tvkain.it@gmail.com'
+Đăng nhập với các tài khoản
+Tài khoản: 'staff.it@gmail.com'
+Mật khẩu: '1'
 
-Mật khẩu '1'
+Tài khoản: 'lamnt@gmail.com'
+Mật khẩu: '1'
