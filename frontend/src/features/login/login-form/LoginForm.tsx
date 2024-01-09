@@ -41,62 +41,52 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Grid
-        container
-        rowSpacing={{ xs: 2 }}
-        sx={{ width: 400, backgroundColor: 'white', px: 2, py: 4 }}
+      <Box
+        display='flex'
+        flexDirection='column'
+        gap={2}
+        sx={{ width: 500, backgroundColor: 'white', px: 2, py: 4 }}
         justifyContent='center'
         alignItems='center'
       >
-        <Grid container item justifyContent='center' alignItems='center' columnspacing={4}>
-          <Grid item xs={4}>
-            <Box component='img' src='/src/assets/logo.svg' />
-          </Grid>
+        <Box display='flex' justifyContent='center' alignItems='center' gap={2}>
+          <Box component='img' src='/src/assets/logo.svg' />
+          <Typography variant='h4' color='primary'>
+            Myhome
+          </Typography>
+        </Box>
 
-          <Grid item xs={6}>
-            <Typography variant='h4' color='primary'>
-              Myhome
-            </Typography>
-          </Grid>
-        </Grid>
+        <Typography color='primary.text' alignSelf='flex-start'>
+          Đăng nhập
+        </Typography>
 
-        <Grid item xs={12}>
-          <Typography color='primary.text'>Đăng nhập</Typography>
-        </Grid>
+        <TextField
+          sx={{ width: 1 }}
+          id='username'
+          name='username'
+          label='Tên đăng nhập'
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          error={formik.touched.username && Boolean(formik.errors.username)}
+          helperText={formik.touched.username && formik.errors.username}
+        />
 
-        <Grid item xs={12}>
-          <TextField
-            sx={{ width: 1 }}
-            id='username'
-            name='username'
-            label='Tên đăng nhập'
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            error={formik.touched.username && Boolean(formik.errors.username)}
-            helperText={formik.touched.username && formik.errors.username}
-          />
-        </Grid>
+        <TextField
+          sx={{ width: 1 }}
+          id='password'
+          name='password'
+          label='Mật khẩu'
+          type='password'
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+        />
 
-        <Grid item xs={12}>
-          <TextField
-            sx={{ width: 1 }}
-            id='password'
-            name='password'
-            label='Mật khẩu'
-            type='password'
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <Button color='primary' fullWidth variant='contained' type='submit'>
-            Đăng nhập
-          </Button>
-        </Grid>
-      </Grid>
+        <Button color='primary' fullWidth variant='contained' type='submit'>
+          Đăng nhập
+        </Button>
+      </Box>
     </form>
   );
 }
