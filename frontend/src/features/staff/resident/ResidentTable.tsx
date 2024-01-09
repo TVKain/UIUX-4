@@ -69,7 +69,9 @@ export default function ResidentTable() {
 
   useEffect(() => {
     const fetchUserInfos = async () => {
-      const response = await getUserInfos();
+      let response = await getUserInfos();
+
+      response = response.filter((userInfo) => userInfo.ApartmentId !== null);
 
       console.log(response);
 
