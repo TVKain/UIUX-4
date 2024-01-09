@@ -27,7 +27,7 @@ const ApartmentAddForm = () => {
       size: yup
         .number()
         .required('Kích cỡ căn hộ không được để trống')
-        .min(0, 'Kích cỡ căn hộ phải lớn hơn 0'),
+        .min(1, 'Kích cỡ căn hộ phải lớn hơn 0'),
       BuildingId: yup.string().required('Chung cư không được để trống'),
     }),
 
