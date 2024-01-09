@@ -102,7 +102,7 @@ export default function StaffDashboard() {
                 <Groups2
                   sx={{
                     fontSize: 120,
-                    color: '#4CAF50',
+                    color: '#ED6C02',
                   }}
                 />
                 <Typography variant='h4' color='text' fontWeight='bold'>
@@ -130,7 +130,7 @@ export default function StaffDashboard() {
                 <LocationCity
                   sx={{
                     fontSize: 120,
-                    color: '#1e4620',
+                    color: '#357b38',
                   }}
                 />
                 <Typography variant='h4' color='text' fontWeight='bold'>
@@ -186,7 +186,7 @@ export default function StaffDashboard() {
                 <AdminPanelSettings
                   sx={{
                     fontSize: 120,
-                    color: '#757575',
+                    color: '#1769aa',
                   }}
                 />
                 <Typography variant='h4' color='text' fontWeight='bold'>
