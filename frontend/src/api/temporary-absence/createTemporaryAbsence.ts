@@ -9,10 +9,7 @@ interface CreateTemporaryAbsenceRequest extends Omit<TemporaryAbsence, 'id'> {}
 async function createTemporaryAbsence(
   data: CreateTemporaryAbsenceRequest,
 ): Promise<CreateTemporaryAbsenceRequest> {
-  const result = await axios.post<CreateTemporaryAbsenceRequest>(
-    `${url}/temporary-residences`,
-    data,
-  );
+  const result = await axios.post<CreateTemporaryAbsenceRequest>(`${url}/temporary-absences`, data);
 
   return result.data;
 }
