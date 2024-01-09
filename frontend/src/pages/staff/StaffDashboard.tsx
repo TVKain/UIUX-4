@@ -102,7 +102,7 @@ export default function StaffDashboard() {
                 <Groups2
                   sx={{
                     fontSize: 120,
-                    color: '#ED6C02',
+                    color: '#A64C01',
                   }}
                 />
                 <Typography variant='h4' color='text' fontWeight='bold'>
