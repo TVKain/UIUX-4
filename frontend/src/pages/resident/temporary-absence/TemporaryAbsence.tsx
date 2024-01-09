@@ -120,8 +120,8 @@ export default function TemporaryAbscence() {
             <TextField
               label='Địa chỉ đến'
               fullWidth
-              name='reason'
-              value={formik.values.reason}
+              name='destinationAddress'
+              value={formik.values.destinationAddress}
               onChange={formik.handleChange('destinationAddress')}
               error={formik.touched.destinationAddress && Boolean(formik.errors.destinationAddress)}
               helperText={formik.touched.destinationAddress && formik.errors.destinationAddress}
